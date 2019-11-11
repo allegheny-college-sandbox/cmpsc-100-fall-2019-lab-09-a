@@ -1,0 +1,43 @@
+---
+name: lab-09
+break: true
+indent: 4
+---
+src/main:
+    java:
+        anagram/TestAnagram.java:
+            ConfirmFileExists
+            MatchFileFragment --fragment "TODO" --count 0 --exact
+            MatchFileFragment --fragment "{Your Name Here}" --count 0 --exact
+            MatchFileFragment --fragment "while (" --count 1
+            MatchFileFragment --fragment "new Scanner" --count 1
+            MatchFileFragment --fragment "new File" --count 1
+            MatchFileFragment --fragment "inputs/names.list" --count 1 --exact
+            MatchFileFragment --fragment "new AnagramTest(" --count 1
+            MatchFileRegex --regex "AnagramTest\s[a-zA-Z0-9]+" --count 1 --exact
+            MatchFileRegex --regex "hasNext|hasNextLine" --count 1 --exact
+            CountSingleLineComments --language Java --count 4
+
+src/main:
+    java:
+        anagram/AnagramTest.java:
+            ConfirmFileExists
+            MatchFileFragment --fragment "TODO" --count 0 --exact
+            MatchFileFragment --fragment "{Your Name Here}" --count 0 --exact
+            MatchFileFragment --fragment "public boolean testWords()" --count 1 --exact
+            MatchFileFragment --fragment "private char[] sort(char[]" --count 1 --exact
+            MatchFileFragment --fragment "for (" --count 3
+            MatchFileRegex --regex "char\s[a-zA-Z0-9]+\s=" --count 1
+            CountSingleLineComments --language Java --count 5
+            
+writing:
+    reflection.md:
+        ConfirmFileExists
+        CountFileWords --count 500
+        MatchFileFragment --fragment "TODO" --count 0 --exact
+        CountMarkdownTags --tag "heading" --count 7
+        CountMarkdownTags --tag "code_block" --count 2
+            
+CountCommits --count 5
+ExecuteCommand --command "gradle build"
+CountCommandOutput --command "gradle run" --count 16
